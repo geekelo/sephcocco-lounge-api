@@ -10,7 +10,7 @@ class CreateSephcoccoUsers < ActiveRecord::Migration[7.2]
       t.timestamps
     end
 
-    add_index :users, :email, unique: true
+    add_index :sephcocco_users, :email, unique: true
   end
 
   def down
