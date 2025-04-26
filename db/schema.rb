@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_04_22_141438) do
+ActiveRecord::Schema[7.2].define(version: 2025_04_26_120449) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "sephcocco_user_roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_sephcocco_user_roles_on_name", unique: true
+  end
 
   create_table "sephcocco_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email", null: false
@@ -22,6 +29,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_04_22_141438) do
     t.string "whatsapp_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "sephcocco_user_role_id", null: false
     t.index ["email"], name: "index_sephcocco_users_on_email", unique: true
+    t.index ["sephcocco_user_role_id"], name: "index_sephcocco_users_on_sephcocco_user_role_id"
   end
+
+  add_foreign_key "sephcocco_users", "sephcocco_user_roles"
 end
