@@ -1,10 +1,10 @@
 class Api::V1::AuthenticationController < ApplicationController
   def create
-    user = EventUser.find_by(email: login_params[:email])
-    if user&.authenticate(login_params[:password])
+    user = SephcoccoUser.find_by(email: login_params[:email])
+    if user
       render json: { 
         message: 'Login successful',
-        user: EventUserSerializer.new(user),
+        user: SephcoccoUserSerializer.new(user),
         token: JsonWebToken.encode(sub: user.id)
         }, status: :ok
     else
@@ -15,6 +15,6 @@ class Api::V1::AuthenticationController < ApplicationController
   private
 
   def login_params
-    params.require(:user).permit(:email, :password)
+    params.require(:user).permit(:email)
   end
 end
