@@ -6,6 +6,8 @@ class CreateSephcoccoUsers < ActiveRecord::Migration[7.2]
       t.text :address
       t.string :phone_number
       t.string :whatsapp_number
+      t.string :password_digest, null: false
+      t.string :profile_image_url
 
       t.timestamps
     end
@@ -14,7 +16,7 @@ class CreateSephcoccoUsers < ActiveRecord::Migration[7.2]
   end
 
   def down
-    remove_index :users, :email
-    drop_table :users
+    remove_index :sephcocco_users, :email
+    drop_table :sephcocco_users
   end
 end
