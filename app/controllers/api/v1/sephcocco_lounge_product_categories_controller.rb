@@ -19,7 +19,7 @@ class Api::V1::SephcoccoLoungeProductCategoriesController < ApplicationControlle
     @product_category = SephcoccoLoungeProductCategory.new(product_category_params)
 
     if @product_category.save
-      render json: @product_category, status: :created, location: api_v1_product_category_url(@product_category)
+      render json: @product_category, status: :created
     else
       render json: @product_category.errors, status: :unprocessable_entity
     end

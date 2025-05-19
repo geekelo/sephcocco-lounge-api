@@ -1,5 +1,5 @@
 class V1::SephcoccoLoungeProductsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :update, :destroy, :switch_visibility, :like, :unlike]
   before_action :set_product, only: [:show, :update, :destroy]
 
   # GET /products
@@ -82,6 +82,6 @@ class V1::SephcoccoLoungeProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :short_description, :long_description, :price, :visible, category_ids: [])
+    params.require(:product).permit(:name, :short_description, :long_description, :image_url, :other_images, :amount_in_stock, :price, :visible, category_ids: [])
   end
 end

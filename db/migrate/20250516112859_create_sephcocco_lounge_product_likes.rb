@@ -1,6 +1,6 @@
 class CreateSephcoccoLoungeProductLikes < ActiveRecord::Migration[7.2]
   def up
-    create_table :sephcocco_lounge_product_likes, id: :uuid do |t|
+    create_table :sephcocco_lounge_product_likes, id: :uuid, default: -> { "gen_random_uuid()" } do |t|
       t.uuid :sephcocco_user_id, null: false, foreign_key: true
       t.uuid :sephcocco_lounge_product_id, null: false, foreign_key: true
 
