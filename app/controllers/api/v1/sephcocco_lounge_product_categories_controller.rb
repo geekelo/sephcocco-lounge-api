@@ -44,7 +44,7 @@ class Api::V1::SephcoccoLoungeProductCategoriesController < ApplicationControlle
     @category = SephcoccoLoungeProductCategory.find(params[:category_id])
 
     if @product && @category
-      @product.product_category_assignments.create(sephcocco_lounge_product_category: @category)
+      @product.sephcocco_lounge_product_categories << @category unless @product.sephcocco_lounge_product_categories.include?(@category)
       render json: { message: "Product added to category successfully", product: @product }, status: :created
     else
       render json: { message: "Product or category not found" }, status: :not_found
