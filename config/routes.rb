@@ -9,6 +9,20 @@ Rails.application.routes.draw do
     namespace :v1 do
       post "signup" => "registration#create"
       post "login" => "authentication#create"
+
+      resources :sephcocco_lounge_products do
+        member do
+          post "like" => "sephcocco_lounge_products#like"
+          post "unlike" => "sephcocco_lounge_products#unlike"
+          post "switch_visibility" => "sephcocco_lounge_products#switch_visibility"
+        end
+      end
+      resources :sephcocco_lounge_product_categories do
+        member do
+          post "add_product_to_category" => "sephcocco_lounge_product_categories#add_product_to_category"
+        end
+      end
+      resources :sephcocco_lounge_product_likes
     end
   end
 

@@ -40,7 +40,7 @@ class V1::SephcoccoLoungeProductsController < ApplicationController
 		head :no_content
 	end
 
-	def switch_visibilty
+	def switch_visibility
 		@product = SephcoccoLoungeProduct.find(params[:id])
 		@product.update(visible: !@product.visible)
 		render json: { message: "Product visibility updated successfully", product: @product }

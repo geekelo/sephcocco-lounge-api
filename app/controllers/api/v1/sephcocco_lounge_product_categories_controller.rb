@@ -39,11 +39,24 @@ class Api::V1::SephcoccoLoungeProductCategoriesController < ApplicationControlle
     @product_category.destroy
   end
 
+  def add_product_to_category
+    @product = SephcoccoLoungeProduct.find(params[:product_id])
+    @category = SephcoccoLoungeProductCategory.find(params[:category_id])
+
+    if @product && @category
+      @product.product_category_assignments.create(sephcocco_lounge_product_category: @category)
+      render json: { message: "Product added to category successfully", product: @product }, status: :created
+    else
+      render json: { message: "Product or category not found" }, status: :not_found
+    end
+  end
+
   private
-  def set_product_category    
+
+  def set_product_category
     @product_category = SephcoccoLoungeProductCategory.find(params[:id])
   end
-  
+
   # Only allow a list of trusted parameters through.
   def product_category_params
     params.require(:product_category).permit(:name, :description, :slug)
