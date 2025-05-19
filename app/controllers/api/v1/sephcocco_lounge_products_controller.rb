@@ -18,8 +18,11 @@ class V1::SephcoccoLoungeProductsController < ApplicationController
   def create
     @product = SephcoccoLoungeProduct.new(product_params)
 
+    if product_params[:category_ids].present?
+      @product.sephcocco_lounge_product_categories = SephcoccoLoungeProductCategory.where(id: product_params[:category_ids])
+    end
     if @product.save
-      render json: @product, status: :created, location: api_v1_product_url(@product)
+      render json: @product, status: :created
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -79,6 +82,6 @@ class V1::SephcoccoLoungeProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :visible, :likes, category_ids: [])
+    params.require(:product).permit(:name, :short_description, :long_description, :price, :visible, category_ids: [])
   end
 end
