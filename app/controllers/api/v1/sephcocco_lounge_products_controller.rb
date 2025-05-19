@@ -79,6 +79,6 @@ class V1::SephcoccoLoungeProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :category_id, :visible, :likes)
+    params.require(:product).permit(:name, :description, :price, :visible, :likes, category_ids: [])
   end
 end
