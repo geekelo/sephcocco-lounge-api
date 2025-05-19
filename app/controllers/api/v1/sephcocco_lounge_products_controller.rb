@@ -1,4 +1,4 @@
-class API::V1::SephcoccoLoungeProductsController < ApplicationController
+class Api::V1::SephcoccoLoungeProductsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :update, :destroy, :switch_visibility, :like, :unlike]
   before_action :set_product, only: [:show, :update, :destroy]
 
