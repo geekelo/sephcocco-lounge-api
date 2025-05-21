@@ -1,21 +1,21 @@
 require_relative '../../lib/migration_helpers/product_likes_migration_helper'
 
-class CreateSephcoccoLoungeProductLikes < ActiveRecord::Migration[7.2]
+class CreateSephcoccoPharmacyProductLikes < ActiveRecord::Migration[7.2]
   include ProductLikesMigrationHelper
 
   def up
     create_product_likes_table(
-      prefix: 'sephcocco_lounge',
+      prefix: 'sephcocco_pharmacy',
       user_table: 'sephcocco_users',
-      product_table: 'sephcocco_lounge_products'
+      product_table: 'sephcocco_pharmacy_products'
     )
   end
 
   def down
     drop_product_likes_table(
-      prefix: 'sephcocco_lounge',
+      prefix: 'sephcocco_pharmacy',
       user_table: 'sephcocco_users',
-      product_table: 'sephcocco_lounge_products'
+      product_table: 'sephcocco_pharmacy_products'
     )
   end
 end

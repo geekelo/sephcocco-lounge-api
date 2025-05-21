@@ -3,4 +3,7 @@ class SephcoccoLoungeProduct < ApplicationRecord
   
   has_many :lounge_product_likes, class_name: 'SephcoccoLoungeProductLike', foreign_key: :sephcocco_lounge_product_id, dependent: :destroy
   has_many :likers, through: :lounge_product_likes, source: :sephcocco_user
+
+  has_many :orders, class_name: 'SephcoccoLoungeOrder', foreign_key: :sephcocco_lounge_product_id
+  has_many :buyers, through: :orders, source: :sephcocco_user
 end
