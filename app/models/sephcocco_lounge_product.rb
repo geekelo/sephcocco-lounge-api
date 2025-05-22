@@ -5,7 +5,7 @@ class SephcoccoLoungeProduct < ApplicationRecord
     :sephcocco_lounge_product_categories
   end
 
-  def self.category_join_table
+  def self.join_table_name
     'sephcocco_lounge_product_categories_products'
   end
 
@@ -17,19 +17,11 @@ class SephcoccoLoungeProduct < ApplicationRecord
     :sephcocco_lounge_product_category_id
   end
 
-  def self.product_likes_association_name
-    :lounge_product_likes
+  def self.product_likes_class
+    SephcoccoLoungeProductLike
   end
 
-  def self.product_like_class_name
-    'SephcoccoLoungeProductLike'
-  end
-
-  def self.orders_association_name
-    :orders
-  end
-
-  def self.order_class_name
-    'SephcoccoLoungeOrder'
+  def self.orders_class
+    SephcoccoLoungeOrder
   end
 end

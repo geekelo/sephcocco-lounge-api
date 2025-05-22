@@ -1,10 +1,6 @@
 class SephcoccoLoungeProductCategory < ApplicationRecord
   include ProductCategoryBehavior
 
-  def self.category_association_name
-    :sephcocco_lounge_product_categories
-  end
-
   def self.product_association_name
     :sephcocco_lounge_products
   end
