@@ -1,3 +1,4 @@
+# app/models/sephcocco_lounge_product.rb
 class SephcoccoLoungeProduct < ApplicationRecord
   include ProductBehavior
 
@@ -10,11 +11,11 @@ class SephcoccoLoungeProduct < ApplicationRecord
   end
 
   def self.product_foreign_key
-    :sephcocco_lounge_product_id
+    'sephcocco_lounge_product_id'
   end
 
   def self.category_foreign_key
-    :sephcocco_lounge_product_category_id
+    'sephcocco_lounge_product_category_id'
   end
 
   def self.product_like_class
