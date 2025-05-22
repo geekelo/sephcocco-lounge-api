@@ -53,6 +53,7 @@ class Api::V1::SephcoccoLoungeOrdersController < ApplicationController
     else
       render json: order.errors, status: :unprocessable_entity
     end
+  end
 
   def user_order_update
     if @order.update(order_params)
