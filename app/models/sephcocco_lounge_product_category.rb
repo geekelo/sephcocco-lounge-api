@@ -1,12 +1,19 @@
 class SephcoccoLoungeProductCategory < ApplicationRecord
-  has_and_belongs_to_many :sephcocco_lounge_products, join_table: 'sephcocco_lounge_product_categories_products', foreign_key: :sephcocco_lounge_product_category_id, association_foreign_key: :sephcocco_lounge_product_id
+  include ProductCategoryBehavior
 
-  before_create :create_slug
-  before_update :create_slug, if: :saved_change_to_name?
+  def self.product_association_name
+    :sephcocco_lounge_products
+  end
 
-  private
+  def self.join_table_name
+    'sephcocco_lounge_product_categories_products'
+  end
 
-  def create_slug
-    self.slug = name.parameterize if name.present?
+  def self.category_foreign_key
+    :sephcocco_lounge_product_category_id
+  end
+
+  def self.product_foreign_key
+    :sephcocco_lounge_product_id
   end
 end
