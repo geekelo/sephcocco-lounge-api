@@ -1,9 +1,35 @@
 class SephcoccoLoungeProduct < ApplicationRecord
-  has_and_belongs_to_many :sephcocco_lounge_product_categories, join_table: 'sephcocco_lounge_product_categories_products', foreign_key: :sephcocco_lounge_product_id, association_foreign_key: :sephcocco_lounge_product_category_id
-  
-  has_many :lounge_product_likes, class_name: 'SephcoccoLoungeProductLike', foreign_key: :sephcocco_lounge_product_id, dependent: :destroy
-  has_many :likers, through: :lounge_product_likes, source: :sephcocco_user
+  include ProductBehavior
 
-  has_many :orders, class_name: 'SephcoccoLoungeOrder', foreign_key: :sephcocco_lounge_product_id
-  has_many :buyers, through: :orders, source: :sephcocco_user
+  def self.category_association_name
+    :sephcocco_lounge_product_categories
+  end
+
+  def self.category_join_table
+    'sephcocco_lounge_product_categories_products'
+  end
+
+  def self.product_foreign_key
+    :sephcocco_lounge_product_id
+  end
+
+  def self.category_foreign_key
+    :sephcocco_lounge_product_category_id
+  end
+
+  def self.product_likes_association_name
+    :lounge_product_likes
+  end
+
+  def self.product_like_class_name
+    'SephcoccoLoungeProductLike'
+  end
+
+  def self.orders_association_name
+    :orders
+  end
+
+  def self.order_class_name
+    'SephcoccoLoungeOrder'
+  end
 end

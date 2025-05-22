@@ -1,4 +1,19 @@
 class SephcoccoLoungeProductLike < ApplicationRecord
-  belongs_to :sephcocco_user, class_name: 'SephcoccoUser', foreign_key: :sephcocco_user_id
-  belongs_to :sephcocco_lounge_product, class_name: 'SephcoccoLoungeProduct', foreign_key: :sephcocco_lounge_product_id
+  include ProductLikeBehavior
+
+  def self.user_class_name
+    'SephcoccoUser'
+  end
+
+  def self.product_class_name
+    'SephcoccoLoungeProduct'
+  end
+
+  def self.user_foreign_key
+    :sephcocco_user_id
+  end
+
+  def self.product_foreign_key
+    :sephcocco_lounge_product_id
+  end
 end
