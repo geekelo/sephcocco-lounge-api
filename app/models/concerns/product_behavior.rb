@@ -7,36 +7,51 @@ module ProductBehavior
                             foreign_key: product_foreign_key,
                             association_foreign_key: category_foreign_key
 
-    has_many :product_likes_class, foreign_key: product_foreign_key, dependent: :destroy
-    has_many :likers, through: :product_likes_class, source: :sephcocco_user
+    has_many likes_association_name,
+             class_name: product_like_class.name,
+             foreign_key: product_foreign_key,
+             dependent: :destroy
 
-    has_many :orders_class, foreign_key: product_foreign_key
-    has_many :buyers, through: :orders_class, source: :sephcocco_user
+    has_many :likers, through: likes_association_name, source: :sephcocco_user
+
+    has_many order_association_name,
+             class_name: order_class.name,
+             foreign_key: product_foreign_key
+
+    has_many :buyers, through: order_association_name, source: :sephcocco_user
   end
 
   class_methods do
     def category_association_name
-      raise NotImplementedError, "Define self.category_association_name in your model"
+      raise NotImplementedError, 'Define self.category_association_name'
     end
 
     def join_table_name
-      raise NotImplementedError, "Define self.join_table_name in your model"
+      raise NotImplementedError, 'Define self.join_table_name'
     end
 
     def product_foreign_key
-      raise NotImplementedError, "Define self.product_foreign_key in your model"
+      raise NotImplementedError, 'Define self.product_foreign_key'
     end
 
     def category_foreign_key
-      raise NotImplementedError, "Define self.category_foreign_key in your model"
+      raise NotImplementedError, 'Define self.category_foreign_key'
     end
 
-    def product_likes_class
-      raise NotImplementedError, "Define self.product_likes_class in your model"
+    def product_like_class
+      raise NotImplementedError, 'Define self.product_like_class'
     end
 
-    def orders_class
-      raise NotImplementedError, "Define self.orders_class in your model"
+    def order_class
+      raise NotImplementedError, 'Define self.order_class'
+    end
+
+    def likes_association_name
+      raise NotImplementedError, 'Define self.likes_association_name'
+    end
+
+    def order_association_name
+      raise NotImplementedError, 'Define self.order_association_name'
     end
   end
 end

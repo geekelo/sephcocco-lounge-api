@@ -17,11 +17,19 @@ class SephcoccoLoungeProduct < ApplicationRecord
     :sephcocco_lounge_product_category_id
   end
 
-  def self.product_likes_class
+  def self.product_like_class
     SephcoccoLoungeProductLike
   end
 
-  def self.orders_class
+  def self.order_class
     SephcoccoLoungeOrder
+  end
+
+  def self.likes_association_name
+    :lounge_product_likes
+  end
+
+  def self.order_association_name
+    :orders
   end
 end
