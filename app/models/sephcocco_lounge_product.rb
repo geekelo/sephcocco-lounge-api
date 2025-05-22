@@ -2,7 +2,7 @@ class SephcoccoLoungeProduct < ApplicationRecord
   include ProductBehavior
 
   def self.category_association_name
-    :lounge_product_categories
+    :sephcocco_lounge_product_categories
   end
 
   def self.join_table_name
