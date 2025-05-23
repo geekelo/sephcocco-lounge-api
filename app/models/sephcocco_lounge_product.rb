@@ -1,21 +1,20 @@
-# app/models/sephcocco_lounge_product.rb
 class SephcoccoLoungeProduct < ApplicationRecord
   include ProductBehavior
 
   def self.category_association_name
-    :sephcocco_lounge_product_categories
+    :lounge_product_categories
   end
 
   def self.join_table_name
-    'sephcocco_lounge_product_categories_products'
+    :sephcocco_lounge_product_categories_products
   end
 
   def self.product_foreign_key
-    'sephcocco_lounge_product_id'
+    :sephcocco_lounge_product_id
   end
 
   def self.category_foreign_key
-    'sephcocco_lounge_product_category_id'
+    :sephcocco_lounge_product_category_id
   end
 
   def self.product_like_class
@@ -31,6 +30,6 @@ class SephcoccoLoungeProduct < ApplicationRecord
   end
 
   def self.order_association_name
-    :orders
+    :lounge_orders
   end
 end
