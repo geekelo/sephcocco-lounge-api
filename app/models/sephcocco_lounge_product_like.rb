@@ -16,4 +16,7 @@ class SephcoccoLoungeProductLike < ApplicationRecord
   def self.product_foreign_key
     :sephcocco_lounge_product_id
   end
+
+  # Setup associations *after* class methods are defined
+  setup_product_like_associations
 end
