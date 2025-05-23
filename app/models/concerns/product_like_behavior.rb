@@ -1,49 +1,31 @@
-module ProductBehavior
+module ProductLikeBehavior
   extend ActiveSupport::Concern
 
   included do
-    has_and_belongs_to_many category_association_name,
-                            join_table: join_table_name,
-                            foreign_key: product_foreign_key,
-                            association_foreign_key: category_foreign_key
+    belongs_to :user,
+               class_name: -> { user_class_name }.call,
+               foreign_key: -> { user_foreign_key }.call
 
-    has_many product_likes_class.name.underscore.pluralize.to_sym,
-             class_name: product_likes_class.name,
-             foreign_key: product_foreign_key,
-             dependent: :destroy
-
-    has_many :likers, through: product_likes_class.name.underscore.pluralize.to_sym, source: :sephcocco_user
-
-    has_many orders_class.name.underscore.pluralize.to_sym,
-             class_name: orders_class.name,
-             foreign_key: product_foreign_key
-
-    has_many :buyers, through: orders_class.name.underscore.pluralize.to_sym, source: :sephcocco_user
+    belongs_to :product,
+               class_name: -> { product_class_name }.call,
+               foreign_key: -> { product_foreign_key }.call
   end
 
-  class_methods do
-    def category_association_name
-      raise NotImplementedError, "Define self.category_association_name in your model"
+  module ClassMethods
+    def user_class_name
+      raise NotImplementedError, "Define self.user_class_name in your model"
     end
 
-    def join_table_name
-      raise NotImplementedError, "Define self.join_table_name in your model"
+    def product_class_name
+      raise NotImplementedError, "Define self.product_class_name in your model"
+    end
+
+    def user_foreign_key
+      raise NotImplementedError, "Define self.user_foreign_key in your model"
     end
 
     def product_foreign_key
       raise NotImplementedError, "Define self.product_foreign_key in your model"
-    end
-
-    def category_foreign_key
-      raise NotImplementedError, "Define self.category_foreign_key in your model"
-    end
-
-    def product_likes_class
-      raise NotImplementedError, "Define self.product_likes_class in your model"
-    end
-
-    def orders_class
-      raise NotImplementedError, "Define self.orders_class in your model"
     end
   end
 end
