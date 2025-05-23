@@ -1,13 +1,7 @@
-# app/models/concerns/product_category_behavior.rb
 module ProductCategoryBehavior
   extend ActiveSupport::Concern
 
   included do
-    has_and_belongs_to_many product_association_name,
-                            join_table: join_table_name,
-                            foreign_key: category_foreign_key,
-                            association_foreign_key: product_foreign_key
-
     before_create :create_slug
     before_update :create_slug, if: :saved_change_to_name?
   end
@@ -16,7 +10,14 @@ module ProductCategoryBehavior
     self.slug = name.parameterize if name.present?
   end
 
-  class_methods do
+  module ClassMethods
+    def setup_product_category_association
+      has_and_belongs_to_many product_association_name,
+                              join_table: join_table_name,
+                              foreign_key: category_foreign_key,
+                              association_foreign_key: product_foreign_key
+    end
+
     def product_association_name
       raise NotImplementedError, "Define `self.product_association_name` in your model"
     end
