@@ -1,27 +1,27 @@
 module ProductBehavior
   extend ActiveSupport::Concern
 
-  included do
-    has_and_belongs_to_many category_association_name,
-                            join_table: join_table_name,
-                            foreign_key: product_foreign_key,
-                            association_foreign_key: category_foreign_key
-
-    has_many likes_association_name,
-             class_name: product_like_class.name,
-             foreign_key: product_foreign_key,
-             dependent: :destroy
-
-    has_many :likers, through: likes_association_name, source: :sephcocco_user
-
-    has_many order_association_name,
-             class_name: order_class.name,
-             foreign_key: product_foreign_key
-
-    has_many :buyers, through: order_association_name, source: :sephcocco_user
-  end
-
   class_methods do
+    def setup_product_associations
+      has_and_belongs_to_many category_association_name,
+                              join_table: join_table_name,
+                              foreign_key: product_foreign_key,
+                              association_foreign_key: category_foreign_key
+
+      has_many likes_association_name,
+               class_name: product_like_class.name,
+               foreign_key: product_foreign_key,
+               dependent: :destroy
+
+      has_many :likers, through: likes_association_name, source: :sephcocco_user
+
+      has_many order_association_name,
+               class_name: order_class.name,
+               foreign_key: product_foreign_key
+
+      has_many :buyers, through: order_association_name, source: :sephcocco_user
+    end
+
     def category_association_name
       raise NotImplementedError, 'Define self.category_association_name'
     end

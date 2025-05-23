@@ -32,4 +32,7 @@ class SephcoccoLoungeProduct < ApplicationRecord
   def self.order_association_name
     :lounge_orders
   end
+
+  # 🔧 Call the association setup after all class methods are defined
+  setup_product_associations
 end
